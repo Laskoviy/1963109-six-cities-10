@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
+import { Link } from 'react-router-dom';
+
 /* eslint-disable jsx-a11y/img-redundant-alt */
 function Card() {
   return (
     <article className="cities__card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
-        </a>
+        <Link to="#">
+          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Beautiful &amp; luxurious apartment at great location" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -28,7 +31,7 @@ function Card() {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Wood and stone place</a>
+          <Link to="#">Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Private room</p>
       </div>
