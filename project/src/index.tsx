@@ -8,10 +8,10 @@ const root = ReactDOM.createRoot(
 
 //В файле index.tsx опишите данные, которые нужны в компоненте главной страницы приложения.
 //Передайте их в компонент App.
-const COUNT_OF_AVAILABLE_PLACES = 10;
+const AVAILABLE_PLACES_COUNT = 10;
 
 root.render(
   <React.StrictMode>
-    <App countOfAvailablePlaces={COUNT_OF_AVAILABLE_PLACES}/>
+    <App availablePlacesCount={AVAILABLE_PLACES_COUNT}/>
   </React.StrictMode>,
 );
