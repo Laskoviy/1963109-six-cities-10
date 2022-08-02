@@ -1,14 +1,15 @@
 import {Link} from 'react-router-dom';
-import Card from '../../components/app/card/card';
 import Logo from '../../components/logo/logo';
+import OffersList from '../../components/offers-list/offers-list';
+import { PageCardClass } from '../../const';
+import { Offers } from '../../types/offer';
 
-type MainPageProps = {
-  availablePlacesCount: number;
+type Props = {
+  offers: Offers;
 }
 
-function MainPage({availablePlacesCount}: MainPageProps): JSX.Element {
-  //добавим замену ручного показа карточек через итерацию массива
-  const placesArray = [...Array(availablePlacesCount).keys()];
+function MainPage({ offers }: Props): JSX.Element {
+  const offersCount = offers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -81,7 +82,9 @@ function MainPage({availablePlacesCount}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{availablePlacesCount} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {offersCount} places to stay in Amsterdam
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -98,11 +101,10 @@ function MainPage({availablePlacesCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {
-                  placesArray.map((place) => (
-                    <Card key={`place-${place + 1}`} />
-                  ))
-                }
+                <OffersList
+                  offers={offers}
+                  cardClass={PageCardClass.Main}
+                />
               </div>
             </section>
             <div className="cities__right-section">
