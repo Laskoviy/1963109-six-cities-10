@@ -65,7 +65,7 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((src) => <PropertyPicture key={src} src={src} />)}
+              {images.map((src) => <PropertyPicture key={src} src={src} alt={''} />)}
             </div>
           </div>
           <div className="property__container container">

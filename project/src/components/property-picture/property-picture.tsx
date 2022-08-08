@@ -1,14 +1,15 @@
 type Props = {
     src: string;
+    alt: string;
   }
 
-function PropertyPicture({ src }: Props): JSX.Element {
+function PropertyPicture({ src, alt }: Props): JSX.Element {
   return (
     <div className="property__image-wrapper">
       <img
         src={src}
         className="property__image"
-        alt="Studio"
+        alt={alt}
       />
     </div>
   );

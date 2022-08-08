@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, ButtonClass, ImageSize, PageCardClass } from '../../../const';
+import { AppRoute, ButtonClass, PageCardClass } from '../../../const';
 import { Offer } from '../../../types/offer';
 import BookmarkButton from '../../bookmark-button/bookmark-button';
 import { capitalizeFirstLetter, getCountStars } from '../../utils/utils';
@@ -7,9 +7,20 @@ import { capitalizeFirstLetter, getCountStars } from '../../utils/utils';
 type Props = {
   offer: Offer;
   cardClass: PageCardClass;
-  onActive?: () => void;
-  onInactive?: () => void;
+  onActive: () => void;
+  onInactive: () => void;
 };
+
+const ImageSize = {
+  Big: {
+    height: 200,
+    width: 260,
+  },
+  Small: {
+    height: 110,
+    width: 150,
+  }
+} as const;
 
 function Card(props: Props): JSX.Element {
   const { offer, cardClass, onActive, onInactive } = props;

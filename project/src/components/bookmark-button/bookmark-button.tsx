@@ -3,6 +3,7 @@ import { ButtonClass, ButtonSize } from '../../const';
 type Props = {
     buttonClass: ButtonClass,
     isFavorite: boolean;
+   /*  onClick={() => changeFavoriteStatus(offer.id, !offer.isFavorite)} (оставил на следующий раз)*/
   }
 
 function BookmarkButton({ buttonClass, isFavorite }: Props): JSX.Element {

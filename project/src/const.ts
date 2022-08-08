@@ -43,17 +43,6 @@ export const ButtonSize = {
   }
 } as const;
 
-export const ImageSize = {
-  Big: {
-    height: 200,
-    width: 260,
-  },
-  Small: {
-    height: 110,
-    width: 150,
-  }
-} as const;
-
 export const inputRatingOption = [
   { rating: 5, title: 'perfect' },
   { rating: 4, title: 'good' },

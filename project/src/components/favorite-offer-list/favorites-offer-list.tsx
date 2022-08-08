@@ -1,7 +1,6 @@
-import { Fragment } from 'react';
 import { PageCardClass } from '../../const';
 import { Offers } from '../../types/offer';
-import FavoriteCity from '../fav-city/fav-city';
+import FavoriteCity from '../favorites-city/favorites-city';
 import OffersList from '../offers-list/offers-list';
 import { getCitiesOffers } from '../utils/utils';
 
@@ -14,7 +13,7 @@ function FavoriteOffersList({ offers, cardClass }: Props): JSX.Element {
   const citiesOffers = getCitiesOffers(offers);
 
   return (
-    <Fragment>
+    <>
       {citiesOffers.map((items) => {
         const [city, cityOffers] = items;
         return (
@@ -34,7 +33,7 @@ function FavoriteOffersList({ offers, cardClass }: Props): JSX.Element {
           </li>);
       }
       )}
-    </Fragment >
+    </>
   );
 }
 

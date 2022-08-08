@@ -1,19 +1,18 @@
-import { Fragment } from 'react';
 import { Reviews } from '../../types/reviews';
 import { getCountStars, getFormatDate } from '../utils/utils';
 
-type UserReviewProps = {
+type Props = {
     reviews: Reviews;
   }
 
-function UserReview({ reviews }: UserReviewProps): JSX.Element {
+function UserReview({ reviews }: Props): JSX.Element {
   return (
-    <Fragment>
+    <>
       {reviews.map((review) => {
         const countStars = getCountStars(review.rating);
         const date = getFormatDate(review.date);
         return (
-          < li
+          <li
             key={review.id}
             className="reviews__item"
           >
@@ -51,7 +50,7 @@ function UserReview({ reviews }: UserReviewProps): JSX.Element {
         );
       }
       )}
-    </Fragment>
+    </>
   );
 }
 

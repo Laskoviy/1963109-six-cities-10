@@ -4,8 +4,6 @@ import { Offer, Offers } from '../../types/offer';
 
 
 const MULTIPLIER_RATING = 20;
-const FIRST_LETTER = 0;
-const START_INDEX = 1;
 
 function getUniqueCities(offers: Offers): string[] {
   const cities = offers.map((offer) => offer.city.name);
@@ -19,7 +17,7 @@ export function getCountStars(rating: number): string {
 }
 
 export function capitalizeFirstLetter(text: string): string {
-  return text.charAt(FIRST_LETTER).toUpperCase() + text.slice(START_INDEX);
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 export function getCitiesOffers(offers: Offers): [string, Offer[]][] {
