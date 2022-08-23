@@ -50,3 +50,19 @@ export const inputRatingOption = [
   { rating: 2, title: 'badly' },
   { rating: 1, title: 'terribly' },
 ] as const;
+
+export const UrlMarker = {
+  Default: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg'
+} as const;
+
+export const IconParameter = {
+  Size: {
+    x: 40,
+    y: 40
+  },
+  Anchor: {
+    x: 20,
+    y: 40
+  }
+} as const;
