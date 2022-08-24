@@ -1,8 +1,11 @@
 import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
+import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import { PageCardClass } from '../../const';
+import { City } from '../../mocks/offers';
 import { Offers } from '../../types/offer';
+
 
 type Props = {
   offers: Offers;
@@ -108,7 +111,10 @@ function MainPage({ offers }: Props): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                city={City}
+                offers={offers}
+              />
             </div>
           </div>
         </div>
