@@ -5,6 +5,7 @@ import useMap from '../../hooks/useMap';
 import { City, Offers } from '../../types/offer';
 
 type MapProps = {
+    setAdditionalClass: string;
     city: City;
     offers: Offers;
   };
@@ -16,7 +17,7 @@ const defaultCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const { city, offers } = props;
+  const { setAdditionalClass, city, offers } = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -39,7 +40,8 @@ function Map(props: MapProps): JSX.Element {
   }, [map, offers]);
 
   return (
-    <section className="cities__map map"
+    <section
+      className={`${setAdditionalClass} map`}
       ref={mapRef}
     >
     </section>

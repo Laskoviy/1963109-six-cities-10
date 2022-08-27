@@ -3,7 +3,7 @@ export const City = {
   location: {
     latitude: 52.37454,
     longitude: 4.897976,
-    zoom: 13
+    zoom: 10
   }
 };
 
@@ -240,11 +240,11 @@ export const nearPlacesOffers = [
   {
     id: 1,
     city: {
-      name: 'Cologne',
+      name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 10
       }
     },
     previewImage: 'https://10.react.pages.academy/static/hotel/4.jpg',
@@ -291,20 +291,20 @@ export const nearPlacesOffers = [
     },
     description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
     location: {
-      latitude: 50.934361,
-      longitude: 6.943974,
-      zoom: 16
+      latitude: 52.3909553943595,
+      longitude: 4.85309666406189,
+      zoom: 8
     }
   },
 
   {
     id: 2,
     city: {
-      name: 'Cologne',
+      name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 10
       }
     },
     previewImage: 'https://10.react.pages.academy/static/hotel/19.jpg',
@@ -351,9 +351,9 @@ export const nearPlacesOffers = [
     },
     description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
     location: {
-      latitude: 50.934361,
-      longitude: 6.943974,
-      zoom: 16
+      latitude: 52.3909553945595,
+      longitude: 4.85309666466189,
+      zoom: 8
     }
   },
 
@@ -362,9 +362,9 @@ export const nearPlacesOffers = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 10
       }
     },
     previewImage: 'https://10.react.pages.academy/static/hotel/13.jpg',
@@ -411,9 +411,9 @@ export const nearPlacesOffers = [
     },
     description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
     location: {
-      latitude: 50.934361,
-      longitude: 6.943974,
-      zoom: 16
+      latitude: 52.3909553946595,
+      longitude: 4.85309666486189,
+      zoom: 8
     }
   },
 ];

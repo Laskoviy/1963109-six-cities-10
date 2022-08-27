@@ -1,13 +1,15 @@
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import FormReview from '../../components/form-review/form-review';
 import Logo from '../../components/logo/logo';
+import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import PropertyFeatures from '../../components/property-features/property-features';
 import PropertyPicture from '../../components/property-picture/property-picture';
-import UserReview from '../../components/user-review/user-review';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import { capitalizeFirstLetter, getCountStars } from '../../components/utils/utils';
 import { ButtonClass, ImageRoomCount, PageCardClass } from '../../const';
+import { City } from '../../mocks/offers';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
 import NotFoundPage from '../notFoundPage/not-found';
@@ -24,6 +26,7 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
   const offer = offers.find((item) => item.id === numId);
   const isNaN = !numId;
   const isNotOffer = !offer;
+  /* nearPlacesOffers.forEach((e, i) => { if (i < 3) {return (e);} }); */
 
   if (isNaN || isNotOffer) {
     return <NotFoundPage />;
@@ -45,7 +48,7 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile" to="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"/>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" />
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">3</span>
                   </Link>
@@ -87,7 +90,7 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: countStars}}></span>
+                  <span style={{ width: countStars }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -128,17 +131,17 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <UserReview
-                    reviews={reviews}
-                  />
-                </ul>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList reviews={reviews} />
                 <FormReview />
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            setAdditionalClass={'property__map'}
+            city={City}
+            offers={nearPlacesOffers}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
