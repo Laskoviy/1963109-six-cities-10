@@ -112,6 +112,7 @@ function MainPage({ offers }: Props): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
+                setAdditionalClass={'cities__map'}
                 city={City}
                 offers={offers}
               />

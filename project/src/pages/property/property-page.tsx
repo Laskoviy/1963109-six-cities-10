@@ -1,4 +1,4 @@
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import FormReview from '../../components/form-review/form-review';
 import Logo from '../../components/logo/logo';
@@ -48,7 +48,7 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile" to="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"/>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" />
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">3</span>
                   </Link>
@@ -90,7 +90,7 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: countStars}}></span>
+                  <span style={{ width: countStars }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -132,17 +132,16 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList reviews={reviews}/>
+                <ReviewsList reviews={reviews} />
                 <FormReview />
               </section>
             </div>
           </div>
-          <section className="property__map map">
-            <Map
-              city={City}
-              offers={nearPlacesOffers}
-            />
-          </section>
+          <Map
+            setAdditionalClass={'property__map'}
+            city={City}
+            offers={nearPlacesOffers}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
