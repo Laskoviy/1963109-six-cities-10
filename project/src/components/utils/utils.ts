@@ -1,6 +1,6 @@
 
-import { month } from '../../const';
-import { Offer, Offers } from '../../types/offer';
+import { City, month } from '../../const';
+import { Location, Offer, Offers } from '../../types/offer';
 
 
 const MULTIPLIER_RATING = 20;
@@ -31,6 +31,21 @@ export function getCitiesOffers(offers: Offers): [string, Offer[]][] {
   });
 
   return Array.from(cityOffersMap);
+}
+
+export function getActiveCityOffers(city: City, offers: Offers): Offers {
+  return offers.filter((offer) => city === offer.city.name);
+}
+
+export function getActiveCityLocation(city: City, offers: Offers): Location {
+  const offersActiveCity = getActiveCityOffers(city, offers);
+  const [offer] = offersActiveCity;
+
+  return {
+    latitude: offer.city.location.latitude,
+    longitude: offer.city.location.longitude,
+    zoom: offer.city.location.zoom
+  };
 }
 
 export function getFormatDate(date: string): string {

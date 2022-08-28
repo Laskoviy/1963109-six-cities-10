@@ -2,14 +2,13 @@ import { Link, useParams } from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import FormReview from '../../components/form-review/form-review';
 import Logo from '../../components/logo/logo';
-import Map from '../../components/map/map';
+
 import OffersList from '../../components/offers-list/offers-list';
 import PropertyFeatures from '../../components/property-features/property-features';
 import PropertyPicture from '../../components/property-picture/property-picture';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import { capitalizeFirstLetter, getCountStars } from '../../components/utils/utils';
 import { ButtonClass, ImageRoomCount, PageCardClass } from '../../const';
-import { City } from '../../mocks/offers';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
 import NotFoundPage from '../notFoundPage/not-found';
@@ -17,16 +16,15 @@ import NotFoundPage from '../notFoundPage/not-found';
 type Props = {
   offers: Offers;
   nearPlacesOffers: Offers;
-  reviews: Reviews
+  reviews: Reviews;
 }
 
-function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element {
+function PropertyPage({ nearPlacesOffers, reviews, offers }: Props): JSX.Element {
   const { id } = useParams();
   const numId = Number(id);
   const offer = offers.find((item) => item.id === numId);
   const isNaN = !numId;
   const isNotOffer = !offer;
-  /* nearPlacesOffers.forEach((e, i) => { if (i < 3) {return (e);} }); */
 
   if (isNaN || isNotOffer) {
     return <NotFoundPage />;
@@ -137,11 +135,11 @@ function PropertyPage({ offers, nearPlacesOffers, reviews }: Props): JSX.Element
               </section>
             </div>
           </div>
-          <Map
+          {/* <Map
             setAdditionalClass={'property__map'}
-            city={City}
-            offers={nearPlacesOffers}
-          />
+            activeCity={activeCity}
+            activeCityOffers={activeCityOffers}
+          /> */}
         </section>
         <div className="container">
           <section className="near-places places">
