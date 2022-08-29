@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { offers } from '../../mocks/offers';
 import FavoritesPage from '../../pages/favoritesPage/fav-page';
 import LoginPage from '../../pages/loginPage/login-page';
 import MainPage from '../../pages/mainPage/main';
@@ -10,37 +11,20 @@ import { Reviews } from '../../types/reviews';
 import PrivateRoute from '../privateRoute/private-route';
 
 type Props = {
-  offers: Offers;
   favoriteOffers: Offers;
   nearPlacesOffers: Offers;
   reviews: Reviews;
-};
+}
 
-//В App получите эти данные из props и передайте их в компонент главной страницы приложения.
-//добавляем маршрутизацию
 function App(props: Props): JSX.Element {
-  const { offers, favoriteOffers, nearPlacesOffers, reviews } = props;
+  const { favoriteOffers, nearPlacesOffers, reviews } = props;
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers}/>}
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<LoginPage />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            //добавление компонента приватного маршрута
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
-              <FavoritesPage offers={favoriteOffers}/>
-            </PrivateRoute>
-          }
+          element={<MainPage />}
         />
         <Route
           path={`${AppRoute.Room}/:id`}
@@ -53,7 +37,21 @@ function App(props: Props): JSX.Element {
           }
         />
         <Route
-          path="*"
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.Auth}
+            >
+              <FavoritesPage offers={favoriteOffers} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRoute.Login}
+          element={<LoginPage />}
+        />
+        <Route
+          path={AppRoute.NotFound}
           element={<NotFoundPage />}
         />
       </Routes>
