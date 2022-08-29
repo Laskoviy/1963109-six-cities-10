@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, ButtonClass, PageCardClass } from '../../../const';
 import { Offer } from '../../../types/offer';
@@ -22,7 +23,7 @@ const ImageSize = {
   }
 } as const;
 
-function Card(props: Props): JSX.Element {
+const Card: React.FC<Props> = (props) => {
   const { offer, cardClass, onActive, onInactive } = props;
   const countStars = getCountStars(offer.rating);
   const offerType = capitalizeFirstLetter(offer.type);
@@ -92,6 +93,6 @@ function Card(props: Props): JSX.Element {
       </div>
     </article>
   );
-}
+};
 
 export default Card;

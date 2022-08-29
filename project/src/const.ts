@@ -9,6 +9,15 @@ export enum AppRoute {
     NotFound = '*',
   }
 
+export enum ImagePropertyCount {
+    Start = 0,
+    End = 6,
+  }
+
+export enum APIRoute {
+    Offers = '/hotels',
+  }
+
 //добавление типов авторизации
 export enum AuthorizationStatus {
     Auth = 'AUTH',

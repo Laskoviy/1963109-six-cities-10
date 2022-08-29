@@ -1,3 +1,4 @@
+import React from 'react';
 import { ButtonClass, ButtonSize } from '../../const';
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
    /*  onClick={() => changeFavoriteStatus(offer.id, !offer.isFavorite)} (оставил на следующий раз)*/
   }
 
-function BookmarkButton({ buttonClass, isFavorite }: Props): JSX.Element {
+const BookmarkButton: React.FC<Props> = ({ buttonClass, isFavorite }) => {
   const buttonSize = buttonClass === ButtonClass.OfferCard ? ButtonSize.Small : ButtonSize.Big;
 
   return (
@@ -24,7 +25,7 @@ function BookmarkButton({ buttonClass, isFavorite }: Props): JSX.Element {
       <span className="visually-hidden">To bookmarks</span>
     </button>
   );
-}
+};
 
 
 export default BookmarkButton;

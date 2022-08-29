@@ -1,4 +1,5 @@
 
+import React from 'react';
 import CitiesListTabs from '../../components/cities-list-tabs/cities-list-tabs';
 import Logo from '../../components/logo/logo';
 import MainOffers from '../../components/offers/offers';
@@ -7,7 +8,7 @@ import { getActiveCityOffers } from '../../components/utils/utils';
 import { PageCardClass } from '../../const';
 import { useAppSelector } from '../../hooks';
 
-function MainPage(): JSX.Element {
+const MainPage: React.FC = () => {
   const { offers, activeCity } = useAppSelector((state) => state);
 
   const activeCityOffers = getActiveCityOffers(activeCity, offers);
@@ -62,11 +63,10 @@ function MainPage(): JSX.Element {
           {isEmptyOffers
             ? <MainOffersEmpty activeCity={activeCity} />
             : <MainOffers offersCount={offersCount} activeCityOffers={activeCityOffers} cardClass={PageCardClass.Main} activeCity={activeCity} />}
-
         </div>
       </main>
     </div>
   );
-}
+};
 
 export default MainPage;

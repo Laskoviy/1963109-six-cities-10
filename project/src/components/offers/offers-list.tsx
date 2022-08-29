@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { PageCardClass } from '../../const';
 import { Offers } from '../../types/offer';
 import Card from '../app/card/card';
@@ -8,7 +8,7 @@ type Props = {
     cardClass: PageCardClass;
   };
 
-function OffersList({ offers, cardClass }: Props): JSX.Element {
+const OffersList: React.FC<Props> = ({ offers, cardClass }) => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   // Заглушка для переменной activeCard
@@ -29,6 +29,6 @@ function OffersList({ offers, cardClass }: Props): JSX.Element {
       )}
     </Fragment>
   );
-}
+};
 
 export default OffersList;

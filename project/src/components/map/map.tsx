@@ -13,7 +13,7 @@ type Props = {
     activeCityOffers: Offers;
   };
 
-function Map(props: Props): JSX.Element {
+const Map: React.FC<Props> = (props) => {
   const { setAdditionalClass, activeCity, activeCityOffers } = props;
   const activeCityLocation = getActiveCityLocation(activeCity, activeCityOffers);
   const mapRef = useRef(null);
@@ -38,6 +38,6 @@ function Map(props: Props): JSX.Element {
     >
     </section>
   );
-}
+};
 
 export default Map;
