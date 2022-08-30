@@ -1,7 +1,8 @@
+import React from 'react';
 import { City, PageCardClass } from '../../const';
 import { Offers } from '../../types/offer';
 import Map from '../map/map';
-import OffersList from '../offers-list/offers-list';
+import OffersList from './offers-list';
 
 type Props = {
   offersCount: number;
@@ -10,7 +11,7 @@ type Props = {
   activeCity: City
 }
 
-function MainOffers(props: Props): JSX.Element {
+const MainOffers: React.FC<Props> = (props) => {
   const { offersCount, activeCityOffers, cardClass, activeCity } = props;
   return (
     <div className="cities__places-container container">
@@ -55,6 +56,6 @@ function MainOffers(props: Props): JSX.Element {
 
     </div>
   );
-}
+};
 
 export default MainOffers;

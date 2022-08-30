@@ -3,11 +3,11 @@ import { MutableRefObject, useEffect } from 'react';
 import { defaultCustomIcon } from '../const';
 import { Offers } from '../types/offer';
 
-function useMarker(
+const useMarker = (
   prevMarkersRef: MutableRefObject<Marker[]>,
   activeCityOffers: Offers,
   map: Map | null
-): void {
+): void => {
 
   useEffect(() => {
     if (map) {
@@ -27,6 +27,6 @@ function useMarker(
       });
     }
   }, [prevMarkersRef, activeCityOffers, map]);
-}
+};
 
 export default useMarker;

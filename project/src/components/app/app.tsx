@@ -1,7 +1,9 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { offers } from '../../mocks/offers';
+import { useAppSelector } from '../../hooks';
 import FavoritesPage from '../../pages/favoritesPage/fav-page';
+import LoadingPage from '../../pages/loadingPage/loading-page';
 import LoginPage from '../../pages/loginPage/login-page';
 import MainPage from '../../pages/mainPage/main';
 import NotFoundPage from '../../pages/notFoundPage/not-found';
@@ -16,8 +18,14 @@ type Props = {
   reviews: Reviews;
 }
 
-function App(props: Props): JSX.Element {
+const App: React.FC<Props> = (props) => {
   const { favoriteOffers, nearPlacesOffers, reviews } = props;
+
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+
+  if (isDataLoaded) {
+    return <LoadingPage />;
+  }
 
   return (
     <BrowserRouter>
@@ -30,7 +38,6 @@ function App(props: Props): JSX.Element {
           path={`${AppRoute.Room}/:id`}
           element={
             <PropertyPage
-              offers={offers}
               nearPlacesOffers={nearPlacesOffers}
               reviews={reviews}
             />
@@ -57,6 +64,6 @@ function App(props: Props): JSX.Element {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

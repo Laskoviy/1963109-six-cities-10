@@ -3,13 +3,13 @@ import { Location } from '../types/offer';
 import { MutableRefObject, useEffect } from 'react';
 import { City } from '../const';
 
-function useChangeLocation(
+const useChangeLocation = (
   prevActiveCityRef: MutableRefObject<City>,
   prevMarkersRef: MutableRefObject<Marker[]>,
   activeCity: City,
   activeCityLocation: Location,
   map: Map | null
-): void {
+): void => {
 
   useEffect(() => {
     if (prevActiveCityRef.current !== activeCity && map) {
@@ -29,6 +29,6 @@ function useChangeLocation(
       );
     }
   }, [prevActiveCityRef, prevMarkersRef, activeCity, activeCityLocation, map]);
-}
+};
 
 export default useChangeLocation;

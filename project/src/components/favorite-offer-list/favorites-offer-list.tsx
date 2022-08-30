@@ -1,7 +1,8 @@
+import React from 'react';
 import { PageCardClass } from '../../const';
 import { Offers } from '../../types/offer';
 import FavoriteCity from '../favorites-city/favorites-city';
-import OffersList from '../offers-list/offers-list';
+import OffersList from '../offers/offers-list';
 import { getCitiesOffers } from '../utils/utils';
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
     cardClass: PageCardClass;
   }
 
-function FavoriteOffersList({ offers, cardClass }: Props): JSX.Element {
+const FavoriteOffersList: React.FC<Props> = ({ offers, cardClass }) => {
   const citiesOffers = getCitiesOffers(offers);
 
   return (
@@ -35,6 +36,6 @@ function FavoriteOffersList({ offers, cardClass }: Props): JSX.Element {
       )}
     </>
   );
-}
+};
 
 export default FavoriteOffersList;

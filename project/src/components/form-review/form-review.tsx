@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { CommentForm } from '../../types/reviews';
-import FormRatingInput from '../form-raiting-input/form-raiting-input';
+import FormRating from '../form-raiting-input/form-raiting-input';
 
-function FormReview(): JSX.Element {
+const FormReview: React.FC = () => {
   const [review, setReview] = useState<CommentForm>({
     rating: null,
     comment: '',
@@ -21,9 +21,7 @@ function FormReview(): JSX.Element {
         }}
         className="reviews__rating-form form__rating"
       >
-
-        <FormRatingInput />
-
+        <FormRating />
       </div>
 
       <textarea
@@ -50,6 +48,6 @@ function FormReview(): JSX.Element {
       </div>
     </form >
   );
-}
+};
 
 export default FormReview;
