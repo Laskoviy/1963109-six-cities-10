@@ -1,25 +1,30 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { Route, Routes } from 'react-router-dom';
+import browserHistory from '../../browser-history';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import FavoritesPage from '../../pages/favoritesPage/fav-page';
 import LoadingPage from '../../pages/loadingPage/loading-page';
-import LoginPage from '../../pages/loginPage/login-page';
 import MainPage from '../../pages/mainPage/main';
 import NotFoundPage from '../../pages/notFoundPage/not-found';
 import PropertyPage from '../../pages/property/property-page';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
+import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../privateRoute/private-route';
 
 type Props = {
   favoriteOffers: Offers;
   nearPlacesOffers: Offers;
   reviews: Reviews;
+  activeCityOffers: Offers;
+  // eslint-disable-next-line
+  activeCity: any; //временная заглушка
 }
 
+
 const App: React.FC<Props> = (props) => {
-  const { favoriteOffers, nearPlacesOffers, reviews } = props;
+  const { favoriteOffers, nearPlacesOffers, reviews, activeCityOffers, activeCity } = props;
 
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
@@ -28,7 +33,7 @@ const App: React.FC<Props> = (props) => {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -40,6 +45,8 @@ const App: React.FC<Props> = (props) => {
             <PropertyPage
               nearPlacesOffers={nearPlacesOffers}
               reviews={reviews}
+              activeCityOffers={activeCityOffers}
+              activeCity={activeCity}
             />
           }
         />
@@ -53,14 +60,14 @@ const App: React.FC<Props> = (props) => {
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginPage />}
+          element={<LoadingPage />}
         />
         <Route
           path={AppRoute.NotFound}
           element={<NotFoundPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 };
 

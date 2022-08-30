@@ -9,6 +9,11 @@ type Props = {
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
   const { authorizationStatus } = useAppSelector((state) => state);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return null;
+  }
+
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ? children

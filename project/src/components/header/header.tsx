@@ -1,8 +1,8 @@
 import React from 'react';
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
-import HeaderGuest from '../header-guest/header-guest';
-import HeaderUser from '../header-user/header-user';
+import HeaderGuest from './header-guest';
+import HeaderUser from './header-user';
 import Logo from '../logo/logo';
 
 const Header: React.FC = () => {
