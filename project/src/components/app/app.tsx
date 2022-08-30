@@ -46,9 +46,7 @@ const App: React.FC<Props> = (props) => {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
+            <PrivateRoute>
               <FavoritesPage offers={favoriteOffers} />
             </PrivateRoute>
           }
