@@ -13,7 +13,7 @@ export type InitialState = {
 const initialState: InitialState = {
   activeCity: City.Paris,
   offers: [],
-  isDataLoaded: true
+  isDataLoaded: false
 };
 
 export const reducer = createReducer(initialState, (builder) => {

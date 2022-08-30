@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import FormReview from '../../components/form-review/form-review';
 import Logo from '../../components/logo/logo';
+import Map from '../../components/map/map';
 import OffersList from '../../components/offers/offers-list';
 import PropertyFeatures from '../../components/property-features/property-features';
 import PropertyPicture from '../../components/property-picture/property-picture';
 import UserReview from '../../components/user-review/user-review';
 import { capitalizeFirstLetter, getCountStars } from '../../components/utils/utils';
-import { ButtonClass, ImagePropertyCount, PageCardClass } from '../../const';
+import { ButtonClass, City, ImagePropertyCount, PageCardClass } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
@@ -17,10 +18,12 @@ import NotFoundPage from '../notFoundPage/not-found';
 type Props = {
   nearPlacesOffers: Offers;
   reviews: Reviews;
+  activeCityOffers: Offers;
+  activeCity: City;
 }
 
 const PropertyPage: React.FC<Props> = (props) => {
-  const { nearPlacesOffers, reviews } = props;
+  const { activeCityOffers, activeCity, nearPlacesOffers, reviews } = props;
 
   const offers = useAppSelector((state) => state.offers);
 
@@ -165,7 +168,11 @@ const PropertyPage: React.FC<Props> = (props) => {
             </div>
           </div>
 
-          <section className="property__map map"></section>
+          <Map
+            setAdditionalClass={'property__map'}
+            activeCity={activeCity}
+            activeCityOffers={activeCityOffers}
+          />
         </section>
 
 
