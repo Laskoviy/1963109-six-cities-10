@@ -1,15 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { Route, Routes } from 'react-router-dom';
+import browserHistory from '../../browser-history';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import FavoritesPage from '../../pages/favoritesPage/fav-page';
 import LoadingPage from '../../pages/loadingPage/loading-page';
-import LoginPage from '../../pages/loginPage/login-page';
 import MainPage from '../../pages/mainPage/main';
 import NotFoundPage from '../../pages/notFoundPage/not-found';
 import PropertyPage from '../../pages/property/property-page';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
+import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../privateRoute/private-route';
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
   nearPlacesOffers: Offers;
   reviews: Reviews;
 }
+
 
 const App: React.FC<Props> = (props) => {
   const { favoriteOffers, nearPlacesOffers, reviews } = props;
@@ -28,7 +30,7 @@ const App: React.FC<Props> = (props) => {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -46,23 +48,21 @@ const App: React.FC<Props> = (props) => {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
+            <PrivateRoute>
               <FavoritesPage offers={favoriteOffers} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginPage />}
+          element={<LoadingPage />}
         />
         <Route
           path={AppRoute.NotFound}
           element={<NotFoundPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 };
 

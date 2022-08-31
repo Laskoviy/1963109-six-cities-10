@@ -16,6 +16,8 @@ export enum ImagePropertyCount {
 
 export enum APIRoute {
     Offers = '/hotels',
+    Login = '/login',
+    Logout = '/logout'
   }
 
 //добавление типов авторизации
