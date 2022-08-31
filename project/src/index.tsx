@@ -23,8 +23,6 @@ root.render(
         favoriteOffers={favoriteOffers}
         nearPlacesOffers={nearPlacesOffers}
         reviews={reviews}
-        activeCityOffers={[]}
-        activeCity={[]}
       />
     </Provider>
   </React.StrictMode>,

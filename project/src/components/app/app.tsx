@@ -17,14 +17,11 @@ type Props = {
   favoriteOffers: Offers;
   nearPlacesOffers: Offers;
   reviews: Reviews;
-  activeCityOffers: Offers;
-  // eslint-disable-next-line
-  activeCity: any; //временная заглушка
 }
 
 
 const App: React.FC<Props> = (props) => {
-  const { favoriteOffers, nearPlacesOffers, reviews, activeCityOffers, activeCity } = props;
+  const { favoriteOffers, nearPlacesOffers, reviews } = props;
 
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
@@ -45,8 +42,6 @@ const App: React.FC<Props> = (props) => {
             <PropertyPage
               nearPlacesOffers={nearPlacesOffers}
               reviews={reviews}
-              activeCityOffers={activeCityOffers}
-              activeCity={activeCity}
             />
           }
         />
