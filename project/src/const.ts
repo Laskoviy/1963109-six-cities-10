@@ -96,8 +96,8 @@ export const city = [
 ] as const;
 
 export const UrlMarker = {
-  Default: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
-  Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg'
+  Default: 'img/pin.svg',
+  Active: 'img/pin-active.svg'
 } as const;
 
 export const IconParameter = {
@@ -116,3 +116,15 @@ export const defaultCustomIcon = new Icon({
   iconSize: [IconParameter.Size.x, IconParameter.Size.y],
   iconAnchor: [IconParameter.Anchor.x, IconParameter.Anchor.y],
 });
+
+export const activeCustomIcon = new Icon({
+  iconUrl: UrlMarker.Active,
+  iconSize: [IconParameter.Size.x, IconParameter.Size.y],
+  iconAnchor: [IconParameter.Anchor.x, IconParameter.Anchor.y],
+});
+
+export enum NameSpace {
+  App = 'APP',
+  Data = 'DATA',
+  User = 'USER'
+}

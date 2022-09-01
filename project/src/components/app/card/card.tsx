@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, ButtonClass, PageCardClass } from '../../../const';
 import { Offer } from '../../../types/offer';
@@ -8,9 +8,10 @@ import { capitalizeFirstLetter, getCountStars } from '../../utils/utils';
 type Props = {
   offer: Offer;
   cardClass: PageCardClass;
-  onActive: () => void;
-  onInactive: () => void;
+  onActiveCard?: (value: number | null) => void;
 };
+
+const TIMER = 500;
 
 const ImageSize = {
   Big: {
@@ -24,16 +25,36 @@ const ImageSize = {
 } as const;
 
 const Card: React.FC<Props> = (props) => {
-  const { offer, cardClass, onActive, onInactive } = props;
+  const { offer, cardClass, onActiveCard } = props;
   const countStars = getCountStars(offer.rating);
   const offerType = capitalizeFirstLetter(offer.type);
   const isFavoriteStyle = cardClass === PageCardClass.Favorite;
   const imageSize = isFavoriteStyle ? ImageSize.Small : ImageSize.Big;
 
+  const timerRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  const handleActiveCard = () => {
+    if (onActiveCard !== undefined) {
+      timerRef.current = setTimeout(() => onActiveCard(offer.id), TIMER);
+    }
+  };
+
+  const handleInactiveCard = () => {
+    if (onActiveCard !== undefined) {
+      onActiveCard(null);
+      clearTimeout(timerRef.current);
+    }
+  };
+
+  useEffect(
+    () =>
+      () =>
+        clearTimeout(timerRef.current), []);
+
   return (
     <article
-      onMouseEnter={onActive}
-      onMouseLeave={onInactive}
+      onMouseEnter={handleActiveCard}
+      onMouseLeave={handleInactiveCard}
       className={`${cardClass}__card place-card`}
     >
 

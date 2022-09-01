@@ -10,6 +10,7 @@ import UserReview from '../../components/user-review/user-review';
 import { capitalizeFirstLetter, getCountStars } from '../../components/utils/utils';
 import { ButtonClass, ImagePropertyCount, PageCardClass } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getOffers } from '../../store/app-data/selectors';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
 import NotFoundPage from '../notFoundPage/not-found';
@@ -22,7 +23,7 @@ type Props = {
 const PropertyPage: React.FC<Props> = (props) => {
   const { nearPlacesOffers, reviews } = props;
 
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   const { id } = useParams();
   const numId = Number(id);

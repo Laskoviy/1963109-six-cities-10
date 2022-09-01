@@ -8,6 +8,7 @@ import LoadingPage from '../../pages/loadingPage/loading-page';
 import MainPage from '../../pages/mainPage/main';
 import NotFoundPage from '../../pages/notFoundPage/not-found';
 import PropertyPage from '../../pages/property/property-page';
+import { getDataLoadedStatus } from '../../store/app-data/selectors';
 import { Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
 import HistoryRouter from '../history-route/history-route';
@@ -23,7 +24,7 @@ type Props = {
 const App: React.FC<Props> = (props) => {
   const { favoriteOffers, nearPlacesOffers, reviews } = props;
 
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const isDataLoaded = useAppSelector(getDataLoadedStatus);
 
   if (isDataLoaded) {
     return <LoadingPage />;

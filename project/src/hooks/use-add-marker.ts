@@ -1,12 +1,13 @@
 import { Map, Marker } from 'leaflet';
 import { MutableRefObject, useEffect } from 'react';
-import { defaultCustomIcon } from '../const';
+import { activeCustomIcon, defaultCustomIcon } from '../const';
 import { Offers } from '../types/offer';
 
-const useMarker = (
+const useAddMarker = (
   prevMarkersRef: MutableRefObject<Marker[]>,
   activeCityOffers: Offers,
-  map: Map | null
+  map: Map | null,
+  activeCardId: number | null
 ): void => {
 
   useEffect(() => {
@@ -19,14 +20,16 @@ const useMarker = (
 
         marker
           .setIcon(
-            defaultCustomIcon
+            activeCardId !== null && offer.id === activeCardId
+              ? activeCustomIcon
+              : defaultCustomIcon
           )
           .addTo(map);
 
         prevMarkersRef.current.push(marker);
       });
     }
-  }, [prevMarkersRef, activeCityOffers, map]);
+  }, [prevMarkersRef, activeCityOffers, map, activeCardId]);
 };
 
-export default useMarker;
+export default useAddMarker;

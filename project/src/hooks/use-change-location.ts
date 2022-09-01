@@ -1,7 +1,7 @@
 import { Map, Marker } from 'leaflet';
-import { Location } from '../types/offer';
 import { MutableRefObject, useEffect } from 'react';
 import { City } from '../const';
+import { Location } from '../types/offer';
 
 const useChangeLocation = (
   prevActiveCityRef: MutableRefObject<City>,
@@ -13,7 +13,6 @@ const useChangeLocation = (
 
   useEffect(() => {
     if (prevActiveCityRef.current !== activeCity && map) {
-
       prevActiveCityRef.current = activeCity;
 
       prevMarkersRef.current.forEach((marker) => marker.remove());
