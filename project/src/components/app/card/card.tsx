@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { AppRoute, ButtonClass, PageCardClass } from '../../../const';
+import { AppRoute, ComponentClass, PageCardClass } from '../../../const';
 import { Offer } from '../../../types/offer';
-import BookmarkButton from '../../bookmark-button/bookmark-button';
-import { capitalizeFirstLetter, getCountStars } from '../../utils/utils';
+import FavoriteButton from '../../favorite-button/favorite-button';
+import PremiumMark from '../../premium-mark/premium-mark';
+import { capitalizeFirstLetter } from '../../utils/utils';
+import RatingModule from '../../rating-block/rating-block';
 
 type Props = {
   offer: Offer;
@@ -26,10 +29,13 @@ const ImageSize = {
 
 const Card: React.FC<Props> = (props) => {
   const { offer, cardClass, onActiveCard } = props;
-  const countStars = getCountStars(offer.rating);
   const offerType = capitalizeFirstLetter(offer.type);
   const isFavoriteStyle = cardClass === PageCardClass.Favorite;
   const imageSize = isFavoriteStyle ? ImageSize.Small : ImageSize.Big;
+
+  const cardInfoClass = classNames('place-card__info', {
+    'favorites__card-info': isFavoriteStyle
+  });
 
   const timerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
@@ -58,12 +64,10 @@ const Card: React.FC<Props> = (props) => {
       className={`${cardClass}__card place-card`}
     >
 
-      <div
-        className="place-card__mark"
-        hidden={!offer.isPremium}
-      >
-        <span>Premium</span>
-      </div>
+      <PremiumMark
+        isPremium={offer.isPremium}
+        componentClass={ComponentClass.OfferCard}
+      />
 
       <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
         <a style={{ pointerEvents: 'none' }} href="/">
@@ -77,30 +81,24 @@ const Card: React.FC<Props> = (props) => {
         </a>
       </div>
 
-      <div
-        className={`place-card__info ${isFavoriteStyle ? 'favorites__card-info' : ''}`}
-      >
+      <div className={cardInfoClass}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}&nbsp;</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <BookmarkButton
-            buttonClass={ButtonClass.OfferCard}
+          <FavoriteButton
+            buttonClass={ComponentClass.OfferCard}
             isFavorite={offer.isFavorite}
           />
 
         </div>
 
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-
-            <span style={{ width: countStars }} />
-
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <RatingModule
+          rating={offer.rating}
+          componentClass={ComponentClass.OfferCard}
+        />
         <h2 className="place-card__name">
 
           <Link

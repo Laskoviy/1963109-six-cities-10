@@ -1,24 +1,27 @@
 import React from 'react';
+import { Offer } from '../../types/offer';
+import { capitalizeFirstLetter } from '../utils/utils';
 
 type Props = {
-    goods: string[];
+    offer: Offer
   }
 
-const PropertyFeatures: React.FC<Props> = ({ goods }) => (
-  <div className="property__inside">
-    <h2 className="property__inside-title">What&apos;s inside</h2>
-    <ul className="property__inside-list">
-      {goods.map((good) => (
-        <li
-          key={good}
-          className="property__inside-item"
-        >
-          {good}
-        </li>
-      )
-      )}
+const PropertyFeatures: React.FC<Props> = ({ offer }) => {
+  const offerType = capitalizeFirstLetter(offer.type);
+
+  return (
+    <ul className="property__features">
+      <li className="property__feature property__feature--entire">
+        {offerType}
+      </li>
+      <li className="property__feature property__feature--bedrooms">
+        {`${offer.bedrooms} Bedrooms`}
+      </li>
+      <li className="property__feature property__feature--adults">
+        {`Max ${offer.maxAdults} adults`}
+      </li>
     </ul>
-  </div>
-);
+  );
+};
 
 export default PropertyFeatures;

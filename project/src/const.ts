@@ -9,16 +9,24 @@ export enum AppRoute {
     NotFound = '*',
   }
 
-export enum ImagePropertyCount {
-    Start = 0,
-    End = 6,
+export enum MapClass {
+    Main = 'cities__map map',
+    Property = 'property__map map'
   }
 
 export enum APIRoute {
-    Offers = '/hotels',
+    Offer = '/hotels',
     Login = '/login',
-    Logout = '/logout'
+    Logout = '/logout',
+    Nearby = 'nearby',
+    Comment = '/comments',
+    Favorite = '/favorite'
   }
+
+export const ToastText = {
+  SuccessLogged: 'You are successfully logged in!',
+  ReviewAdded: 'Review successfully added!'
+} as const;
 
 //добавление типов авторизации
 export enum AuthorizationStatus {
@@ -53,9 +61,10 @@ export enum PageCardClass {
     Favorite = 'favorites',
   }
 
-export enum ButtonClass {
+export enum ComponentClass {
     Property = 'property',
     OfferCard = 'place-card',
+    Review = 'reviews'
   }
 
 export const ButtonSize = {
@@ -123,8 +132,27 @@ export const activeCustomIcon = new Icon({
   iconAnchor: [IconParameter.Anchor.x, IconParameter.Anchor.y],
 });
 
+
 export enum NameSpace {
   App = 'APP',
-  Data = 'DATA',
-  User = 'USER'
+  OfferList = 'OFFER_LIST',
+  Offer = 'OFFER',
+  Review = 'REVIEW',
+  Favorite = 'FAVORITE',
+  User = 'USER',
+  Data = 'Data'
 }
+
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first'
+}
+
+export const sortType = [
+  SortType.Popular,
+  SortType.PriceLowToHigh,
+  SortType.PriceHighToLow,
+  SortType.TopRatedFirst
+] as const;

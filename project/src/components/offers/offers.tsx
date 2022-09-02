@@ -1,23 +1,34 @@
-import React, { useCallback, useState } from 'react';
-import { City, PageCardClass } from '../../const';
-import { Offers } from '../../types/offer';
+import React, { useCallback, useEffect, useState } from 'react';
+import { MapClass, PageCardClass, SortType } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { filterActiveCityOffers } from '../../store/app-data/selectors';
+import { getActiveCity } from '../../store/app-process/selectors';
+
 import Map from '../map/map';
+import SortOptions from '../sort-options/sort-options';
+import { getSortedOffers } from '../utils/utils';
 import OffersList from './offers-list';
 
-type Props = {
-  offersCount: number;
-  activeCityOffers: Offers;
-  cardClass: PageCardClass;
-  activeCity: City
-}
+const MainOffers: React.FC = () => {
+  const activeCity = useAppSelector(getActiveCity);
+  const activeCityOffers = useAppSelector(filterActiveCityOffers);
 
-const MainOffers: React.FC<Props> = (props) => {
-  const { offersCount, activeCityOffers, cardClass, activeCity } = props;
 
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
+  const [activeSortType, setActiveSortType] = useState<SortType>(SortType.Popular);
 
+  useEffect(() => {
+    setActiveSortType(SortType.Popular);
+  }, [activeCity]);
+
+  const sortedActiveCityOffers = getSortedOffers(activeSortType, activeCityOffers);
+  const offersCount = activeCityOffers.length;
   const onActiveCard = useCallback((value: number | null) => {
     setActiveCardId(value);
+  }, []);
+
+  const onActiveSortType = useCallback((sortType: SortType) => {
+    setActiveSortType(sortType);
   }, []);
 
   return (
@@ -28,27 +39,15 @@ const MainOffers: React.FC<Props> = (props) => {
         <b className="places__found">
           {offersCount} places to stay in Amsterdam
         </b>
-
-        <form className="places__sorting" action="#" method="get">
-          <span className="places__sorting-caption">Sort by&nbsp;</span>
-          <span className="places__sorting-type" tabIndex={0}>
-            Popular
-            <svg className="places__sorting-arrow" width="7" height="4">
-              <use xlinkHref="#icon-arrow-select"></use>
-            </svg>
-          </span>
-          <ul className="places__options places__options--custom">
-            <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-            <li className="places__option" tabIndex={0}>Price: low to high</li>
-            <li className="places__option" tabIndex={0}>Price: high to low</li>
-            <li className="places__option" tabIndex={0}>Top rated first</li>
-          </ul>
-        </form>
-
+        <SortOptions
+          activeCity={activeCity}
+          activeSortType={activeSortType}
+          onActiveSortType={onActiveSortType}
+        />
         <div className="cities__places-list places__list tabs__content">
           <OffersList
-            offers={activeCityOffers}
-            cardClass={cardClass}
+            offers={sortedActiveCityOffers}
+            cardClass={PageCardClass.Main}
             onActiveCard={onActiveCard}
           />
         </div>
@@ -59,6 +58,7 @@ const MainOffers: React.FC<Props> = (props) => {
           activeCity={activeCity}
           activeCityOffers={activeCityOffers}
           activeCardId={activeCardId}
+          mapClass={MapClass.Main}
         />
       </div>
 

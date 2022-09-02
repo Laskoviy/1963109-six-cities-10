@@ -6,10 +6,10 @@ import App from './components/app/app';
 import { favoriteOffers, nearPlacesOffers} from './mocks/offers';
 import { reviews } from './mocks/reviews';
 import { store } from './store';
-import { checkAuthAction, fetchOfferAction } from './store/api-actions';
+import { checkAuthAction, fetchOffersListAction } from './store/api-actions';
 
 store.dispatch(checkAuthAction());
-store.dispatch(fetchOfferAction());
+store.dispatch(fetchOffersListAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

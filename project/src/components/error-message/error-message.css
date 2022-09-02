@@ -1,0 +1,14 @@
+.review__error__message {
+    color: white;
+    text-align: center;
+    padding-top: 3px;
+    background-color: #ff4a4a;
+  }
+  
+  .login__error__message {
+    position: absolute;
+    margin-block: -24px;
+    color: #ff4a4a;
+    text-align: center;
+    width: 100%
+  }

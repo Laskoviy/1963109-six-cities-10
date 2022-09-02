@@ -1,174 +1,126 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import BookmarkButton from '../../components/bookmark-button/bookmark-button';
-import FormReview from '../../components/form-review/form-review';
-import Logo from '../../components/logo/logo';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
+import Header from '../../components/header/header';
+import Map from '../../components/map/map';
 import OffersList from '../../components/offers/offers-list';
+import PicturesList from '../../components/pictures-list/pictures-list';
+import PremiumMark from '../../components/premium-mark/premium-mark';
 import PropertyFeatures from '../../components/property/property-features';
-import PropertyPicture from '../../components/property/property-picture';
-import UserReview from '../../components/user-review/user-review';
-import { capitalizeFirstLetter, getCountStars } from '../../components/utils/utils';
-import { ButtonClass, ImagePropertyCount, PageCardClass } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { getOffers } from '../../store/app-data/selectors';
-import { Offers } from '../../types/offer';
-import { Reviews } from '../../types/reviews';
+import PropertyGoods from '../../components/property/property-goods';
+import PropertyHost from '../../components/property/property-host';
+import PropertyReviews from '../../components/property/property-reviews';
+import { ComponentClass, MapClass, PageCardClass } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getActiveCity } from '../../store/app-process/selectors';
 import NotFoundPage from '../notFoundPage/not-found';
+import RatingModule from '../../components/rating-block/rating-block';
+import LoadingPage from '../loadingPage/loading-page';
+import { clearOfferData, setOfferDataLoadStatus } from '../../store/offer-data/offer-data';
+import { clearReviewData } from '../../store/review-data/review-data';
+import { getNearOffers, getOffer, getOfferDataLoadStatus } from '../../store/offer-data/selectors';
+import { getReviews } from '../../store/review-data/selector';
+import { fetchNearOffersAction, fetchOfferAction, fetchRewiesAction } from '../../store/api-actions';
 
-type Props = {
-  nearPlacesOffers: Offers;
-  reviews: Reviews;
-}
+const PropertyScreen: React.FC = () => {
 
-const PropertyPage: React.FC<Props> = (props) => {
-  const { nearPlacesOffers, reviews } = props;
-
-  const offers = useAppSelector(getOffers);
-
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const numId = Number(id);
 
-  const activeOffer = offers.find((offer) => offer.id === numId);
+  useEffect(() => {
+    const promiseOffer = dispatch(fetchOfferAction(id));
+    const promiseNearOffers = dispatch(fetchNearOffersAction(id));
+    const promiseReviews = dispatch(fetchRewiesAction(id));
 
-  const isNaN = !numId;
-  const isNotOffer = !activeOffer;
+    Promise.allSettled([promiseOffer, promiseNearOffers, promiseReviews])
+      .then(() => dispatch(setOfferDataLoadStatus(false)));
 
-  if (isNaN || isNotOffer) {
+    return () => {
+      promiseOffer.abort();
+      promiseNearOffers.abort();
+      promiseReviews.abort();
+
+      dispatch(clearOfferData());
+      dispatch(clearReviewData());
+    };
+  }, [id, dispatch]);
+
+  const activeCity = useAppSelector(getActiveCity);
+  const activeOffer = useAppSelector(getOffer);
+  const nearOffers = useAppSelector(getNearOffers);
+  const reviews = useAppSelector(getReviews);
+
+  const isDataLoading = useAppSelector(getOfferDataLoadStatus);
+  const isNotFoundOffer = activeOffer === null;
+
+  if (isDataLoading) {
+    return <LoadingPage />;
+  }
+
+  if (isNotFoundOffer) {
     return <NotFoundPage />;
   }
 
-  const images = activeOffer.images.slice(ImagePropertyCount.Start, ImagePropertyCount.End);
-  const countStars = getCountStars(activeOffer.rating);
-  const offerType = capitalizeFirstLetter(activeOffer.type);
+  const offersList = [activeOffer, ...nearOffers];
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="/">
-                    <div className="header__avatar-wrapper user__avatar-wrapper" />
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="/">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <div className="property__gallery">
-
-              {images.map((src) => <PropertyPicture key={src} src={src} alt={''} />)}
-
-            </div>
+            <PicturesList imagesList={activeOffer.images} />
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
 
-              <div
-                className="property__mark"
-                hidden={!activeOffer.isPremium}
-              >
-                <span>Premium</span>
-              </div>
+              <PremiumMark
+                isPremium={activeOffer.isPremium}
+                componentClass={ComponentClass.Property}
+              />
 
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {activeOffer.title}
                 </h1>
 
-                <BookmarkButton
-                  buttonClass={ButtonClass.Property}
-                  isFavorite={activeOffer.isFavorite}
+                <FavoriteButton
+                  offerId={activeOffer.id}
+                  favoriteStatus={activeOffer.isFavorite}
+                  buttonClass={ComponentClass.Property}
                 />
               </div>
 
-              <div className="property__rating rating">
-                <div className="property__stars rating__stars">
-                  <span style={{ width: countStars }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="property__rating-value rating__value">{activeOffer.rating}</span>
-              </div>
+              <RatingModule
+                rating={activeOffer.rating}
+                componentClass={ComponentClass.Property}
+              />
 
-              <ul className="property__features">
-                <li className="property__feature property__feature--entire">
-                  {offerType}
-                </li>
-                <li className="property__feature property__feature--bedrooms">
-                  {`${activeOffer.bedrooms} Bedrooms`}
-                </li>
-                <li className="property__feature property__feature--adults">
-                  {`Max ${activeOffer.maxAdults} adults`}
-                </li>
-              </ul>
+              <PropertyFeatures offer={activeOffer} />
+
               <div className="property__price">
                 <b className="property__price-value">&euro;{activeOffer.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
 
-              <PropertyFeatures goods={activeOffer.goods} />
+              <PropertyGoods goods={activeOffer.goods} />
 
-              <div className="property__host">
-                <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={activeOffer.host.avatarUrl} width="74" height="74"
-                      alt="Host avatar"
-                    />
-                  </div>
-                  <span className="property__user-name">
-                    {activeOffer.host.name}
-                  </span>
-                  <span className="property__user-status">
-                    {activeOffer.host.isPro ? 'Pro' : ''}
-                  </span>
-                </div>
-                <div className="property__description">
-                  <p className="property__text">
-                    {activeOffer.description}
-                  </p>
-                </div>
-              </div>
+              <PropertyHost offer={activeOffer} />
 
-
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-
-                  <UserReview
-                    reviews={reviews}
-                  />
-
-                </ul>
-
-                <FormReview />
-
-              </section>
-
+              <PropertyReviews offerId={activeOffer.id} reviews={reviews} />
 
             </div>
           </div>
 
-          <section className="property__map map"></section>
+          <Map
+            activeCity={activeCity}
+            activeCityOffers={offersList}
+            activeCardId={activeOffer.id}
+            mapClass={MapClass.Property}
+          />
         </section>
-
 
         <div className="container">
           <section className="near-places places">
@@ -176,10 +128,9 @@ const PropertyPage: React.FC<Props> = (props) => {
             <div className="near-places__list places__list">
 
               <OffersList
-                offers={nearPlacesOffers}
+                offers={nearOffers}
                 cardClass={PageCardClass.Property}
               />
-
             </div>
           </section>
         </div>
@@ -188,4 +139,5 @@ const PropertyPage: React.FC<Props> = (props) => {
   );
 };
 
-export default PropertyPage;
+export default PropertyScreen;
+
