@@ -4,9 +4,9 @@ import { Offers } from '../../types/offer';
 import Card from '../app/card/card';
 
 type Props = {
-    offers: Offers;
-    cardClass: PageCardClass;
-    onActiveCard?: (value: number | null) => void;
+   offers: Offers,
+  cardClass: PageCardClass,
+  onActiveCard?: (value: number | null) => void
   };
 
 const OffersList: React.FC<Props> = ({ offers, cardClass, onActiveCard }) => (

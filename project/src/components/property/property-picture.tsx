@@ -1,16 +1,16 @@
 import React from 'react';
 
 type Props = {
-    src: string;
-    alt: string;
-  }
+  src: string
+}
 
-const PropertyPicture: React.FC<Props> = ({ src, alt }) => (
+
+const PropertyPicture: React.FC<Props> = ({ src }) => (
   <div className="property__image-wrapper">
     <img
       src={src}
       className="property__image"
-      alt={alt}
+      alt="Studio"
     />
   </div>
 );

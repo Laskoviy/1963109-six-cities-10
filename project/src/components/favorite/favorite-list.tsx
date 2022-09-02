@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { PageCardClass } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getFavoriteList } from '../../store/favorite-data/selectors';
-import FavoriteCity from '../favorites-city/favorites-city';
+import FavoriteCity from './favorites-city';
 import OffersList from '../offers/offers-list';
 import { getCitiesOffers } from '../utils/utils';
 

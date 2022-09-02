@@ -1,12 +1,12 @@
 import React from 'react';
 import { ComponentClass } from '../../const';
 
-type PremiumMarkProps = {
+type Props = {
     isPremium: boolean,
     componentClass: ComponentClass
   }
 
-const PremiumMark: React.FC<PremiumMarkProps> = ({ isPremium, componentClass }) => (
+const PremiumMark: React.FC<Props> = ({ isPremium, componentClass }) => (
   <div
     className={`${componentClass}__mark`}
     hidden={!isPremium}

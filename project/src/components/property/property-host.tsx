@@ -3,8 +3,8 @@ import { Offer } from '../../types/offer';
 import classNames from 'classnames';
 
 type Props = {
-    offer: Offer
-  }
+  offer: Offer
+}
 
 const PropertyHost: React.FC<Props> = ({ offer }) => {
   const avatarClass = classNames('property__avatar-wrapper user__avatar-wrapper', {
@@ -33,7 +33,6 @@ const PropertyHost: React.FC<Props> = ({ offer }) => {
           {offer.description}
         </p>
       </div>
-
     </div>
   );
 };

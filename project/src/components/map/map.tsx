@@ -8,7 +8,7 @@ import useChangeLocation from '../../hooks/use-change-location';
 import useRemoveMarker from '../../hooks/use-remove-marker';
 import useAddMarker from '../../hooks/use-add-marker';
 
-type MapProps = {
+type Props = {
   activeCity: City,
   activeCityOffers: Offers,
   activeCardId: number | null,
@@ -16,7 +16,7 @@ type MapProps = {
 };
 
 
-const Map: React.FC<MapProps> = (props) => {
+const Map: React.FC<Props> = (props) => {
   const { activeCity, activeCityOffers, activeCardId, mapClass } = props;
 
   const activeLocation = getLocation(activeCity, activeCityOffers, mapClass);

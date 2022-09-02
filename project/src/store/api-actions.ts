@@ -1,14 +1,12 @@
-import { ReviewData, ReviewResponseData, UserEmail } from './../types/server-data';
+import { AuthData, FavoriteData, ReviewData, ReviewResponseData, UserData, UserEmail } from './../types/server-data';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute, AppRoute, ToastText } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { AuthData } from '../types/authData';
 import { Offer, Offers } from '../types/offer';
 import { Reviews } from '../types/reviews';
 import { OfferId } from '../types/server-data';
-import { AppDispatch, FavoriteData, State } from '../types/state';
-import { UserData } from '../types/userData';
+import { AppDispatch, State } from '../types/state';
 import { redirectToRoute } from './actions';
 import { toast } from 'react-toastify';
 

@@ -1,17 +1,18 @@
 import React from 'react';
+import { ImageLimit } from '../../const';
 import PropertyPicture from '../property/property-picture';
 
 type Props = {
-    imagesList: string[]
-  }
+  imagesList: string[]
+}
 
-const PicturesList: React.FC<Props> = ({ imagesList }) => {
-  const imagesLimitCount = imagesList.slice(0, 6);
+const ImagesList: React.FC<Props> = ({ imagesList }) => {
+  const imagesLimitCount = imagesList.slice(ImageLimit.Start, ImageLimit.End);
   return (
     <div className="property__gallery">
-      {imagesLimitCount.map((src) => <PropertyPicture key={src} src={src} alt={''} />)}
+      {imagesLimitCount.map((src) => <PropertyPicture key={src} src={src} />)}
     </div>
   );
 };
 
-export default PicturesList;
+export default ImagesList;

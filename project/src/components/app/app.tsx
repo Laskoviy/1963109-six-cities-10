@@ -2,13 +2,14 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import { AppRoute } from '../../const';
-import FavoritesPage from '../../pages/favoritesPage/fav-page';
-import LoginPage from '../../pages/loginPage/login-page';
-import MainPage from '../../pages/mainPage/main';
-import NotFoundPage from '../../pages/notFoundPage/not-found';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import LoginPage from '../../pages/login-page/login-page';
+import MainPage from '../../pages/main-page/main-page';
+import NotFoundPage from '../../pages/not-found-page/not-found';
 import PropertyPage from '../../pages/property/property-page';
-import HistoryRouter from '../history-route/history-route';
-import PrivateRoute from '../privateRoute/private-route';
+import HistoryRouter from '../history-router/history-router';
+import PrivateRouteLogin from '../private-rote-login/private-rote-login';
+import PrivateRoute from '../private-route/private-route';
 
 const App: React.FC = (props) => (
   <HistoryRouter history={browserHistory}>

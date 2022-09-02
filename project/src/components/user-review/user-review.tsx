@@ -5,8 +5,8 @@ import RatingModule from '../rating-block/rating-block';
 import { getFormatDate } from '../utils/utils';
 
 type Props = {
-  review: Review;
-  }
+  review: Review
+}
 
 const UserReview: React.FC<Props> = ({ review }) => {
   const date = getFormatDate(review.date);
@@ -23,18 +23,23 @@ const UserReview: React.FC<Props> = ({ review }) => {
             alt="Reviews avatar"
           />
         </div>
+
         <span className="reviews__user-name">
           {review.user.name}
         </span>
-      </div>
+
+      </div >
       <div className="reviews__info">
+
         <RatingModule
           rating={review.rating}
           componentClass={ComponentClass.Review}
         />
+
         <p className="reviews__text">
           {review.comment}
         </p>
+
         <time className="reviews__time" dateTime={review.date}>{date}</time>
       </div>
     </li >

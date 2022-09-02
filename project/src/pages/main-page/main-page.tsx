@@ -6,7 +6,7 @@ import Header from '../../components/header/header';
 import MainOffers from '../../components/offers/offers';
 import MainOffersEmpty from '../../components/offers/offers-empty';
 import { useAppSelector } from '../../hooks';
-import LoadingPage from '../loadingPage/loading-page';
+import LoadingPage from '../loading-page/loading-page';
 import { getOffersListLoadStatus, getIsEmptyOffers } from '../../store/offer-list-data/selectors';
 
 const MainPage: React.FC = () => {

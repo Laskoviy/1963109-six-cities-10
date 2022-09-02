@@ -1,7 +1,7 @@
 import React from 'react';
 
 type Props = {
-    goods: string[];
+    goods: string[]
   }
 
 const PropertyGoods: React.FC<Props> = ({ goods }) => (

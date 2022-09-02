@@ -16,7 +16,7 @@ const REQUEST_TIMEOUT = 5000;
 const SEARCH_EMAIL = 'email';
 const EMAIL_ERROR = 'Your E-mail is invalid!';
 
-export const createApi = (): AxiosInstance => {
+export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT

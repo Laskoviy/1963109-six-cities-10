@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
-import { favoriteOffers, nearPlacesOffers} from './mocks/offers';
-import { reviews } from './mocks/reviews';
+import { AppRoute, Timer } from './const';
 import { store } from './store';
 import { checkAuthAction, fetchOffersListAction } from './store/api-actions';
 
-store.dispatch(checkAuthAction());
+const isFavoritePath = window.location.pathname === AppRoute.Favorite;
+
+store.dispatch(checkAuthAction(isFavoritePath));
 store.dispatch(fetchOffersListAction());
 
 const root = ReactDOM.createRoot(
@@ -16,14 +17,12 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ToastContainer />
-      <App
-        favoriteOffers={favoriteOffers}
-        nearPlacesOffers={nearPlacesOffers}
-        reviews={reviews}
-      />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ToastContainer
+      newestOnTop
+      pauseOnFocusLoss={false}
+      autoClose={Timer.ToastClose}
+    />
+    <App />
+  </Provider>
 );

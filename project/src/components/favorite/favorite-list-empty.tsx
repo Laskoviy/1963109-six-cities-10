@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+
 const FavoriteListEmpty: React.FC = () => (
   <Fragment>
     <h1 className="visually-hidden">Favorites (empty)</h1>
@@ -10,4 +11,5 @@ const FavoriteListEmpty: React.FC = () => (
 );
 
 export default FavoriteListEmpty;
+
 

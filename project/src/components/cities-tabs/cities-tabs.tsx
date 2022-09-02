@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { city } from '../../const';
+import { cityTitle } from '../../const';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setActiveCity } from '../../store/app-process/app-process';
@@ -11,8 +11,9 @@ const CitiesTabs: React.FC = () => {
 
   return (
     <ul className="locations__list tabs__list">
-      {city.map((cityName) => {
+      {cityTitle.map((cityName) => {
         const isActive = activeCity === cityName;
+
         const linkClass = classNames('locations__item-link tabs__item', {
           'tabs__item--active': isActive
         });

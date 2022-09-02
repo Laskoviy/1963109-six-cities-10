@@ -1,5 +1,5 @@
 
-import { City, MapClass, month, SortType } from '../../const';
+import { City, cityTitle, MapClass, month, SortType } from '../../const';
 import { Location, Offer, Offers } from '../../types/offer';
 import { Reviews } from '../../types/reviews';
 

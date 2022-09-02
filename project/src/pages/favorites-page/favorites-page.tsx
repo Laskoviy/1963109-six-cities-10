@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoriteListAction } from '../../store/api-actions';
 import { getFavoriteList, getFavoriteLoadStatus } from '../../store/favorite-data/selectors';
-import LoadingPage from '../loadingPage/loading-page';
-import FavoriteListEmpty from '../../components/favorite-list-empty/favorite-list-empty';
-import FavoriteList from '../../components/favorite-list/favorite-list';
+import LoadingPage from '../loading-page/loading-page';
+import FavoriteListEmpty from '../../components/favorite/favorite-list-empty';
+import FavoriteList from '../../components/favorite/favorite-list';
 
 
 const FavoritesPage: React.FC = () => {

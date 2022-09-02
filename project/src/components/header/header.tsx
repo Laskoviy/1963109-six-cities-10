@@ -1,36 +1,24 @@
 import React from 'react';
-import { AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
-import HeaderGuest from './header-guest';
-import HeaderUser from './header-user';
 import Logo from '../logo/logo';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import HeaderUserSection from './header-user-section';
 
-const Header: React.FC = () => {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+type Props = {
+  isHideUserSection?: boolean
+}
 
-  return (
-    <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
 
-            <Logo />
-
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-
-              {authorizationStatus === AuthorizationStatus.Auth
-                ? <HeaderUser />
-                : <HeaderGuest />}
-
-            </ul>
-          </nav>
+const Header: React.FC<Props> = ({ isHideUserSection }) => (
+  <header className="header">
+    <div className="container">
+      <div className="header__wrapper">
+        <div className="header__left">
+          <Logo />
         </div>
+
+        {!isHideUserSection && <HeaderUserSection />}
       </div>
-    </header>
-  );
-};
+    </div>
+  </header>
+);
 
 export default Header;

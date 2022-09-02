@@ -1,35 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { AppRoute, ComponentClass, PageCardClass } from '../../../const';
+import { AppRoute, ComponentClass, ImageSize, PageCardClass, Timer } from '../../../const';
 import { Offer } from '../../../types/offer';
-import FavoriteButton from '../../favorite-button/favorite-button';
+import FavoriteButton from '../../favorite/favorite-button';
 import PremiumMark from '../../premium-mark/premium-mark';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import RatingModule from '../../rating-block/rating-block';
 
 type Props = {
-  offer: Offer;
-  cardClass: PageCardClass;
-  onActiveCard?: (value: number | null) => void;
+  offer: Offer,
+  cardClass: PageCardClass,
+  onActiveCard?: (value: number | null) => void
 };
-
-const TIMER = 500;
-
-const ImageSize = {
-  Big: {
-    height: 200,
-    width: 260,
-  },
-  Small: {
-    height: 110,
-    width: 150,
-  }
-} as const;
 
 const Card: React.FC<Props> = (props) => {
   const { offer, cardClass, onActiveCard } = props;
+
   const offerType = capitalizeFirstLetter(offer.type);
+
   const isFavoriteStyle = cardClass === PageCardClass.Favorite;
   const imageSize = isFavoriteStyle ? ImageSize.Small : ImageSize.Big;
 
@@ -41,7 +30,7 @@ const Card: React.FC<Props> = (props) => {
 
   const handleActiveCard = () => {
     if (onActiveCard !== undefined) {
-      timerRef.current = setTimeout(() => onActiveCard(offer.id), TIMER);
+      timerRef.current = setTimeout(() => onActiveCard(offer.id), Timer.OfferCard);
     }
   };
 
@@ -49,13 +38,17 @@ const Card: React.FC<Props> = (props) => {
     if (onActiveCard !== undefined) {
       onActiveCard(null);
       clearTimeout(timerRef.current);
+      timerRef.current = undefined;
     }
   };
 
   useEffect(
     () =>
-      () =>
-        clearTimeout(timerRef.current), []);
+      () => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+        }
+      }, []);
 
   return (
     <article
@@ -70,7 +63,7 @@ const Card: React.FC<Props> = (props) => {
       />
 
       <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
-        <a style={{ pointerEvents: 'none' }} href="/">
+        <a className="link__disabled" href="/">
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -89,24 +82,21 @@ const Card: React.FC<Props> = (props) => {
           </div>
 
           <FavoriteButton
+            offerId={offer.id}
+            favoriteStatus={offer.isFavorite}
             buttonClass={ComponentClass.OfferCard}
-            isFavorite={offer.isFavorite}
           />
-
         </div>
 
         <RatingModule
           rating={offer.rating}
           componentClass={ComponentClass.OfferCard}
         />
-        <h2 className="place-card__name">
 
-          <Link
-            to={`${AppRoute.Room}/${offer.id}`}
-          >
+        <h2 className="place-card__name">
+          <Link to={`${AppRoute.Property}/${offer.id}`}>
             {offer.title}
           </Link>
-
         </h2>
         <p className="place-card__type">{offerType}</p>
       </div>
